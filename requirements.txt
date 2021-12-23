@@ -1,0 +1,15 @@
+py-cord
+jishaku
+pymongo[srv]
+requests
+discord-py-slash-command
+python-dotenv
+temperature-converter-py
+pillow
+discord-together
+pyfiglet
+certifi
+buttons
+xkcd
+terminal-animation
+topggpy
