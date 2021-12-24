@@ -8,7 +8,7 @@ from utils import cluster
 
 banned = cluster["sonicbot"]["bans"]
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
@@ -333,9 +333,9 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             title=f"What's new in version {__version__} of Sonicbot",
             colour=self.client.colour,
             description="- Made the `raw` command an embed and escaped all markdown to avoid messed up output (usually seen if the message has \`\`\` in it)\n"
-            + "- Fixed /raw\n"
+            + "- Fixed /embed\n"
             + "- Emoji command now gives a proper error when the URL provided is not an image\n"
-            + "- Re-enabled Discord Together command",
+            + "- enabled Discord Together command",
         )
 
         await ctx.send(embed=changelog)
