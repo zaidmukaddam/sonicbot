@@ -587,7 +587,7 @@ class Utilities(commands.Cog, description="A set of useful utility commands."):
             if footer.lower() != "empty":
                 embed.set_footer(text=footer)
 
-            await msg1.delete()
+            # await msg1.delete()
             with suppress(AttributeError):
                 await ctx.message.delete()
 
