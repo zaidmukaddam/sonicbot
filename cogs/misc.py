@@ -8,7 +8,7 @@ from utils import cluster
 
 banned = cluster["sonicbot"]["bans"]
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
@@ -28,7 +28,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
         embed = discord.Embed(
             title="Sonicbot Stats and Information", colour=self.client.colour
         )
-        embed.add_field(name="Bot version", value=f"v{__version__}", inline=False)
+        embed.add_field(name="Bot version",
+                        value=f"v{__version__}", inline=False)
         embed.add_field(
             name="Command count", value=f"{len(cmd_list)} commands", inline=False
         )
@@ -37,12 +38,14 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             value="View the bot's source code on [GitHub](https://github.com/zaidmukaddam/sonicbot)",
             inline=False,
         )
-        embed.add_field(name="Servers", value=f"{len(self.client.guilds)} servers")
+        embed.add_field(
+            name="Servers", value=f"{len(self.client.guilds)} servers")
         embed.add_field(
             name="Users",
             value=f"{len(self.client.users)} users",
         )
-        embed.add_field(name="Pycord version", value=discord.__version__, inline=False)
+        embed.add_field(name="Pycord version",
+                        value=discord.__version__, inline=False)
         embed.add_field(
             name="Python version", value=platform.python_version(), inline=False
         )
@@ -66,7 +69,7 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             return await ctx.send("❌ You are blocked from submitting suggestions.")
 
         # Get Sonicbot support server's suggestions channel
-        channel = self.client.get_channel(884095439190786059)
+        channel = self.client.get_channel(924153694977683473)
 
         embed = discord.Embed(
             title="Suggestion", description=suggestion, colour=self.client.colour
@@ -107,7 +110,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             {"name": "512px", "url": url_as(format="png", size=512)},
             {"name": "1024px", "url": url_as(format="png", size=1024)},
         ]
-        embed.set_footer(text="All links ending with px are PNGs, in each size.")
+        embed.set_footer(
+            text="All links ending with px are PNGs, in each size.")
 
         embed.description = " | ".join(
             f"[{link['name']}]({link['url']})" for link in av_links
@@ -179,7 +183,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             name="Boost level",
             value=f"Level {ctx.guild.premium_tier}",
         )
-        embed.add_field(name="Categories", value=f"{len(ctx.guild.categories)}")
+        embed.add_field(name="Categories",
+                        value=f"{len(ctx.guild.categories)}")
         embed.add_field(
             name="Text channels",
             value=len(ctx.guild.text_channels),
@@ -189,7 +194,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             value=len(ctx.guild.voice_channels),
         )
 
-        embed.set_footer(text=f"Shard {ctx.guild.shard_id} | Server ID {ctx.guild.id}")
+        embed.set_footer(
+            text=f"Shard {ctx.guild.shard_id} | Server ID {ctx.guild.id}")
 
         await ctx.send(embed=embed)
 
@@ -259,7 +265,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             value=f"<t:{round(member.joined_at.timestamp())}:R>",
         )
         members = sorted(ctx.guild.members, key=lambda m: m.joined_at)
-        embed.add_field(name="Join position", value=str(members.index(member) + 1))
+        embed.add_field(name="Join position",
+                        value=str(members.index(member) + 1))
         embed.add_field(name="Display name", value=member.display_name)
         if len(" ".join(roles)) <= 1024:
             embed.add_field(
@@ -278,7 +285,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
         if member.bot:
             embed.add_field(name="Is this user a bot?", value="Yes, beep boop")
         else:
-            embed.add_field(name="Is this user a bot?", value="No - normal human user")
+            embed.add_field(name="Is this user a bot?",
+                            value="No - normal human user")
 
         embed.set_footer(text=f"User ID: {member.id}")
 
@@ -313,6 +321,29 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
     async def ping_slash(self, ctx: SlashContext):
         await self.ping(ctx)
 
+    # Uptime Command
+    @commands.command(
+        help="View the bot's uptime",
+        brief="View the bot's uptime",
+    )
+    async def uptime(self, ctx):
+        seconds = self.client.uptime/1000
+        minutes = seconds/60
+        hours = minutes/60
+        days = hours/24
+
+        seconds %= 60
+        minutes %= 60
+        hours %= 24
+
+        await ctx.send(
+            f"The bot's uptime is `{days} day(s),{hours} hours, {minutes} minutes, {seconds} seconds`"
+        )
+
+    @cog_ext.cog_slash(name="uptime", description="View the bot's uptime")
+    async def uptime_slash(self, ctx: SlashContext):
+        await self.uptime(ctx)
+
     # Invite command
     @commands.command(help="Add the bot to your server", aliases=["addbot"])
     async def invite(self, ctx):
@@ -332,10 +363,7 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
         changelog = discord.Embed(
             title=f"What's new in version {__version__} of Sonicbot",
             colour=self.client.colour,
-            description="- Made the `raw` command an embed and escaped all markdown to avoid messed up output (usually seen if the message has \`\`\` in it)\n"
-            + "- Fixed /embed\n"
-            + "- Emoji command now gives a proper error when the URL provided is not an image\n"
-            + "- enabled Discord Together command",
+            description="- Added a new command called `uptime` \n",
         )
 
         await ctx.send(embed=changelog)
