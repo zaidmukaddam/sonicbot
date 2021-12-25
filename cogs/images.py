@@ -38,9 +38,9 @@ class Images(commands.Cog, description="Generate fun images!"):
 
         # Paste the avatar/attachment onto the amogus image
         amogus.paste(av, (698, 209))
-        amogus.save("image-outputs/amogus.png")
+        amogus.save("amogus.png")
 
-        await ctx.send(file=discord.File("image-outputs/amogus.png"))
+        await ctx.send(file=discord.File("amogus.png"))
 
     @cog_ext.cog_slash(
         name="amogus",
@@ -205,9 +205,9 @@ class Images(commands.Cog, description="Generate fun images!"):
 
         r = requests.get(url)
         image = Image.open(BytesIO(r.content))
-        image.save("image-outputs/triggered.gif", save_all=True)
+        image.save("triggered.gif", save_all=True)
 
-        file = discord.File("image-outputs/triggered.gif")
+        file = discord.File("triggered.gif")
 
         await ctx.send(file=file)
 
