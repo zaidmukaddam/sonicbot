@@ -327,17 +327,9 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
         brief="View the bot's uptime",
     )
     async def uptime(self, ctx):
-        seconds = self.client.uptime/1000
-        minutes = seconds/60
-        hours = minutes/60
-        days = hours/24
-
-        seconds %= 60
-        minutes %= 60
-        hours %= 24
 
         await ctx.send(
-            f"The bot's uptime is `{days} day(s),{hours} hours, {minutes} minutes, {seconds} seconds`"
+            f"The bot's uptime is `{self.client.uptime}`"
         )
 
     @cog_ext.cog_slash(name="uptime", description="View the bot's uptime")
