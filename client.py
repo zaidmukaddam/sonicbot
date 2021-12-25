@@ -62,7 +62,7 @@ class Client(commands.AutoShardedBot):
             label="Support Server",
             style=ButtonStyle.URL,
             emoji=self.get_emoji(907550097368301578),
-            url="https://discord.gg/NeZvXk5wh5",
+            url="https://discord.gg/7xjhbXrHj5",
         )
         help_buttons = create_actionrow(
             *[
@@ -97,6 +97,7 @@ class Client(commands.AutoShardedBot):
                     emoji=self.get_emoji(907550015063461898),
                     url="https://sonicbot.vercel.app/",
                 ),
+                support_btn,
             ]
         )
         self.error_channel = await self.fetch_channel(922755294252105730)
