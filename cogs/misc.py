@@ -5,16 +5,19 @@ from discord.ext import commands
 from discord_slash import SlashContext, cog_ext
 from discord_slash.utils.manage_commands import create_option
 from utils import cluster
+import datetime, time
 
 banned = cluster["sonicbot"]["bans"]
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 
 class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
     def __init__(self, client):
         self.client: commands.Bot = client
         self.emoji = "<:miscellaneous:907550152775073802>"
+        global startTime 
+        startTime = time.time()
 
     # Bot info command
     @commands.command(
@@ -327,9 +330,9 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
         brief="View the bot's uptime",
     )
     async def uptime(self, ctx):
-
+        uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
         await ctx.send(
-            f"The bot's uptime is `{self.client.uptime}`"
+            f"The bot's uptime is `{uptime}`"
         )
 
     @cog_ext.cog_slash(name="uptime", description="View the bot's uptime")
@@ -355,7 +358,8 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
         changelog = discord.Embed(
             title=f"What's new in version {__version__} of Sonicbot",
             colour=self.client.colour,
-            description="- Added a new command called `uptime` \n",
+            description="- Added a new command called `uptime` \n" + 
+            "- Fixed a bug with the `uptime` command \n",
         )
 
         await ctx.send(embed=changelog)
