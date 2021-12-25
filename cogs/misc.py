@@ -359,7 +359,9 @@ class Miscellaneous(commands.Cog, description="Other miscellaneous commands."):
             title=f"What's new in version {__version__} of Sonicbot",
             colour=self.client.colour,
             description="- Added a new command called `uptime` \n" + 
-            "- Fixed a bug with the `uptime` command \n",
+            "- Fixed a bug with the `uptime` command \n"
+            + "- Fixing the Folder Not Found Error on `amogus` command \n"
+            + "- Added Support Button on info Command",
         )
 
         await ctx.send(embed=changelog)
